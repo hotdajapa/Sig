@@ -1,1 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verificando segurança...</title>
+<style>
+  body {
+    margin: 0;
+    font-family: sans-serif;
+    background-color: #fff;
+    color: #000;
+  }
+  .container {
+    max-width: 360px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+  }
+  h1 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    font-weight: normal;
+  }
+  p {
+    font-size: 14px;
+    color: #444;
+    margin-bottom: 20px;
+  }
+  .captcha-box {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    user-select: none;
+  }
+  .captcha-box input {
+    margin-right: 10px;
+  }
+  .btn-continuar {
+    margin-top: 20px;
+    padding: 10px;
+    width: 100%;
+    background-color: #e5e5e5;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  .check-navegador {
+    display: none;
+    font-size: 13px;
+    margin-top: 20px;
+    text-align: left;
+    color: #555;
+  }
+  .linha-check {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 6px;
+  }
+  .circle {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #ccc;
+  }
+</style>
+</head>
+<body>
 
+<div class="container">
+  <h1>Verificação de Navegador</h1>
+  <p>Seu navegador está verificando se a conexão é segura.</p>
+
+  <div class="captcha-box" onclick="toggleCheckbox()">
+    <input type="checkbox" id="checkbot">
+    <span>Não sou um robô</span>
+  </div>
+
+  <button class="btn-continuar" onclick="continuar()">Continuar</button>
+
+  <div class="check-navegador" id="checkNavegador">
+    <div class="linha-check" id="linha1"><div class="circle"></div> Checando conexão...</div>
+    <div class="linha-check" id="linha2"><div class="circle"></div> Validando navegador...</div>
+    <div class="linha-check" id="linha3"><div class="circle"></div> Confirmando dispositivo...</div>
+  </div>
+</div>
+
+<script>
+  function toggleCheckbox(){
+    let check = document.getElementById("checkbot");
+    check.checked = !check.checked;
+  }
+
+  function continuar(){
+    let check = document.getElementById("checkbot");
+    if(!check.checked){
+      alert("Confirme que você não é um robô para continuar.");
+      return;
+    }
+
+    document.getElementById("checkNavegador").style.display = "block";
+
+    let etapas = ["linha1", "linha2", "linha3"];
+    let index = 0;
+
+    let interval = setInterval(() => {
+      document.querySelector(`#${etapas[index]} .circle`).style.background = "#4caf50";
+      index++;
+      if(index >= etapas.length){
+        clearInterval(interval);
+        setTimeout(() => {
+          window.location.href = "https://wa.me/5521986662243?text=Ol%C3%A1%2C+gostaria+de+adquirir+o+meu+glicomax!";
+        }, 300);
+      }
+    }, 500);
+  }
+</script>
+
+</body>
+</html>
